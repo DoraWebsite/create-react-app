@@ -406,6 +406,8 @@ module.exports = function (
   }
   console.log();
   console.log('Happy hacking!');
+  console.log('');
+  console.log('This is a fork from create-react-app.');
 };
 
 function isReactInstalled(appPackage) {
