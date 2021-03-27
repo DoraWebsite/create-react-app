@@ -17,6 +17,7 @@ const os = require('os');
 const semver = require('semver');
 const immer = require('react-dev-utils/immer').produce;
 const globby = require('react-dev-utils/globby').sync;
+const prettier = require('prettier');
 
 const hasJsxRuntime = (() => {
   if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
@@ -34,7 +35,7 @@ const hasJsxRuntime = (() => {
 function writeJson(fileName, object) {
   fs.writeFileSync(
     fileName,
-    JSON.stringify(object, null, 2).replace(/\n/g, os.EOL) + os.EOL
+    prettier.format(JSON.stringify(object), { parser: 'json' })
   );
 }
 
@@ -156,7 +157,7 @@ function verifyTypeScriptSetup() {
           : 'react',
       reason: 'to support the new JSX transform in React 17',
     },
-    paths: { value: undefined, reason: 'aliased imports are not supported' },
+    // paths: { value: {}, reason: 'aliased imports are not supported' },
   };
 
   const formatDiagnosticHost = {
@@ -218,7 +219,7 @@ function verifyTypeScriptSetup() {
   if (appTsConfig.compilerOptions == null) {
     appTsConfig.compilerOptions = {};
     firstTimeSetup = true;
-  } 
+  }
 
   for (const option of Object.keys(compilerOptions)) {
     const { parsedValue, value, suggested, reason } = compilerOptions[option];

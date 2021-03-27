@@ -29,7 +29,6 @@
 
 'use strict';
 
-const https = require('https');
 const chalk = require('chalk');
 const commander = require('commander');
 const dns = require('dns');
@@ -51,7 +50,7 @@ const packageJson = require('./package.json');
 
 let projectName;
 
-function init() {
+async function init() {
   const program = new commander.Command(packageJson.name)
     .version(packageJson.version)
     .arguments('<project-directory>')
@@ -186,56 +185,34 @@ function init() {
     process.exit(1);
   }
 
-  // We first check the registry directly via the API, and if that fails, we try
-  // the slower `npm view [package] version` command.
-  //
-  // This is important for users in environments where direct access to npm is
-  // blocked by a firewall, and packages are provided exclusively via a private
-  // registry.
-  checkForLatestVersion()
-    .catch(() => {
-      try {
-        return execSync('npm view create-react-app version').toString().trim();
-      } catch (e) {
-        return null;
-      }
-    })
-    .then(latest => {
-      if (latest && semver.lt(packageJson.version, latest)) {
-        console.log();
-        console.error(
-          chalk.yellow(
-            `You are running \`create-react-app\` ${packageJson.version}, which is behind the latest release (${latest}).\n\n` +
-              'We no longer support global installation of Create React App.'
-          )
-        );
-        console.log();
-        console.log(
-          'Please remove any global installs with one of the following commands:\n' +
-            '- npm uninstall -g create-react-app\n' +
-            '- yarn global remove create-react-app'
-        );
-        console.log();
-        console.log(
-          'The latest instructions for creating a new app can be found here:\n' +
-            'https://create-react-app.dev/docs/getting-started/'
-        );
-        console.log();
-        process.exit(1);
-      } else {
-        createApp(
-          projectName,
-          program.verbose,
-          program.scriptsVersion,
-          program.template,
-          program.useNpm,
-          program.usePnp
-        );
-      }
-    });
+  const response = await prompts({
+    type: 'text',
+    name: 'description',
+    message: 'Description',
+  });
+
+  const projectDescription = response.description;
+
+  createApp(
+    projectName,
+    projectDescription,
+    program.verbose,
+    program.scriptsVersion,
+    program.template,
+    program.useNpm,
+    program.usePnp
+  );
 }
 
-function createApp(name, verbose, version, template, useNpm, usePnp) {
+function createApp(
+  name,
+  description,
+  verbose,
+  version,
+  template,
+  useNpm,
+  usePnp
+) {
   const unsupportedNodeVersion = !semver.satisfies(process.version, '>=10');
   if (unsupportedNodeVersion) {
     console.log(
@@ -263,6 +240,7 @@ function createApp(name, verbose, version, template, useNpm, usePnp) {
 
   const packageJson = {
     name: appName,
+    description,
     version: '0.1.0',
     private: true,
   };
@@ -623,6 +601,7 @@ function getInstallPackage(version, originalDirectory) {
 }
 
 function getTemplateInstallPackage(template, originalDirectory) {
+  // TODO[epic=me] This is where you choose the default template
   let templateToInstall = 'cra-template';
   if (template) {
     if (template.match(/^file:/)) {
@@ -1119,29 +1098,6 @@ function executeNodeScript({ cwd, args }, data, source) {
       }
       resolve();
     });
-  });
-}
-
-function checkForLatestVersion() {
-  return new Promise((resolve, reject) => {
-    https
-      .get(
-        'https://registry.npmjs.org/-/package/create-react-app/dist-tags',
-        res => {
-          if (res.statusCode === 200) {
-            let body = '';
-            res.on('data', data => (body += data));
-            res.on('end', () => {
-              resolve(JSON.parse(body).latest);
-            });
-          } else {
-            reject();
-          }
-        }
-      )
-      .on('error', () => {
-        reject();
-      });
   });
 }
 

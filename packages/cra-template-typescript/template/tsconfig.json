@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "pretty": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "baseUrl": "src",
+    "paths": {
+      "#/*": ["components/pages/*"],
+      "C/*": ["components/*"],
+      "Q/*": ["queries/*"],
+      "T/*": ["types/*"],
+      "~/*": ["*"],
+      ">/*": ["../*"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["./src"],
+  "exclude": ["./node_modules", "./public", "./.cache"]
+}
