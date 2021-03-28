@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          ">": "./",
+          "~": "./src",
+          "C": "./src/components",
+          "Q": "./src/queries",
+          "T": "./src/types",
+          "#": "./src/components/pages"
+        }
+      }
+    ]
+  ],
+  "presets": []
+}
