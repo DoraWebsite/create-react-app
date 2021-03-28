@@ -210,11 +210,6 @@ module.exports = function (
     );
   }
 
-  // Setup the eslint config
-  appPackage.eslintConfig = {
-    extends: 'react-app',
-  };
-
   // Setup the browsers list
   appPackage.browserslist = defaultBrowsers;
 
