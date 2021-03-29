@@ -25,9 +25,7 @@
       "postinstall": "husky install",
       "type-check": "tsc --watch --noEmit --skipLibCheck",
       "lint-fix": "eslint --fix --ignore-path .gitignore . --ext .js,.jsx,.ts,.tsx",
-      "format": "prettier --write '{,!(node_modules|.cache|public)/**/}*.{js,jsx,ts,tsx,json,yml,md}'",
-      "storybook": "start-storybook -p 6006",
-      "build-storybook": "build-storybook"
+      "format": "prettier --write '{,!(node_modules|.cache|public)/**/}*.{js,jsx,ts,tsx,json,yml,md}'"
     }
   }
 }
