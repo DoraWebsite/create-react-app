@@ -123,10 +123,7 @@ module.exports = {
       files: ['src/**'],
       rules: {
         'sort-keys-fix/sort-keys-fix': 'warn',
-        'sort-destructure-keys/sort-destructure-keys': [
-          2,
-          { caseSensitive: true },
-        ],
+        'sort-destructure-keys/sort-destructure-keys': [2, { caseSensitive: true }],
       },
     },
     {
@@ -136,4 +133,4 @@ module.exports = {
       },
     },
   ],
-};
+}
