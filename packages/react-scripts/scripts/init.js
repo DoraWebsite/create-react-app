@@ -62,6 +62,9 @@ function tryGitCommit(appPath) {
     execSync('git commit -m "Initialize project using Create React App"', {
       stdio: 'ignore',
     });
+    execSync('git update-index --skip-worktree .vscode/settings.json', {
+      stdio: 'ignore',
+    });
     return true;
   } catch (e) {
     // We couldn't commit in already initialized git repo,
