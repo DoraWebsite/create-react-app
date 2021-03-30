@@ -418,7 +418,7 @@ module.exports = function (webpackEnv) {
                   ],
                 ],
                 // @remove-on-eject-begin
-                babelrc: false,
+                babelrc: true,
                 configFile: false,
                 // Make sure we have a unique cache identifier, erring on the
                 // side of caution.
@@ -448,6 +448,7 @@ module.exports = function (webpackEnv) {
                         },
                       },
                     },
+                    require.resolve('babel-plugin-module-resolver'),
                   ],
                   isEnvDevelopment &&
                     shouldUseReactRefresh &&
