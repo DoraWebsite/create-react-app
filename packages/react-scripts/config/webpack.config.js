@@ -409,15 +409,8 @@ module.exports = function (webpackEnv) {
                 customize: require.resolve(
                   'babel-preset-react-app/webpack-overrides'
                 ),
-                presets: [
-                  [
-                    require.resolve('babel-preset-react-app'),
-                    {
-                      runtime: hasJsxRuntime ? 'automatic' : 'classic',
-                    },
-                  ],
-                ],
                 // @remove-on-eject-begin
+                // TODO[epic=me] babel-loader configuration
                 babelrc: true,
                 configFile: false,
                 // Make sure we have a unique cache identifier, erring on the
