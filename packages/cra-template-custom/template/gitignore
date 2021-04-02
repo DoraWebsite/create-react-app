@@ -71,9 +71,3 @@ yarn-error.log
 
 # Husky
 .husky/_
-
-# VS CODE
-# .vscode/settings.json
-# this is skip from the worktree
-# to undo, run
-# git update-index --no-skip-worktree .vscode/settings.json

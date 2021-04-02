@@ -30,7 +30,8 @@
             "loadershim.js": true,
             "[dD]ocker*": true,
             "Makefile": true,
-            "netlify.toml": true
+            "netlify.toml": true,
+            "lint-staged*": true
           }
         }
       ]
