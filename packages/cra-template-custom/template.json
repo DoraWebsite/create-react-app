@@ -22,7 +22,8 @@
       "lint-staged": "^10.4.2",
       "lodash": "^4.17.21",
       "micromatch": "^4.0.2",
-      "prettier-plugin-sh": "^0.6.0"
+      "prettier-plugin-sh": "^0.6.0",
+      "sort-package-json": "^1.49.0"
     },
     "scripts": {
       "postinstall": "husky install",
