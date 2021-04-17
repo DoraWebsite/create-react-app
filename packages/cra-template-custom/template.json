@@ -29,7 +29,7 @@
       "postinstall": "husky install",
       "type-check": "tsc --watch --noEmit --skipLibCheck",
       "lint-fix": "eslint --fix --ignore-path .gitignore . --ext .js,.jsx,.ts,.tsx",
-      "format": "prettier --write ."
+      "format": "prettier --write . --ignore-path .gitignore"
     },
     "envRegex": "^REACT_APP_"
   }

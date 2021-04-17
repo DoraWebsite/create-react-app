@@ -21,7 +21,7 @@ module.exports = (allStagedFiles) => {
   ])
   const prettiers = prettierFiles.length > 0 ? [`prettier --write ${prettierFiles.map(addQuotes).join(' ')}`] : []
 
-  const basenames = prettierFiles.map((e) => path.basename(e))
+  const basenames = allStagedFiles.map((e) => path.basename(e))
 
   return [...prettiers, basenames.includes('package.json') && 'sort-package-json'].filter((e) => e)
 }

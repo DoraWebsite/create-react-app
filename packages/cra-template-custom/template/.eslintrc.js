@@ -42,7 +42,7 @@ module.exports = {
   ],
   rules: {
     'no-console': 'warn',
-    'react/prop-types': 'off', // Disable prop-types as we use TypeScript for type checking
+    'react/prop-types': 'off',
     'react/display-name': 'off',
     'react/jsx-sort-props': [
       'error',
@@ -94,19 +94,16 @@ module.exports = {
     ],
   },
   overrides: [
-    // Override some TypeScript rules just for .js files
     {
       files: ['*.js'],
       rules: {
         '@typescript-eslint/no-var-requires': 'off',
       },
     },
-    // enable the rule specifically for TypeScript files
     {
       files: ['*.ts', '*.tsx'],
       rules: {},
     },
-    // enable the rule specifically for TypeScript files
     {
       files: ['*.stories.ts', '*.stories.tsx'],
       rules: {
@@ -124,12 +121,6 @@ module.exports = {
       rules: {
         'sort-keys-fix/sort-keys-fix': 'warn',
         'sort-destructure-keys/sort-destructure-keys': [2, { caseSensitive: true }],
-      },
-    },
-    {
-      files: ['src/cms/config.js'],
-      rules: {
-        'sort-keys-fix/sort-keys-fix': 'off',
       },
     },
   ],
