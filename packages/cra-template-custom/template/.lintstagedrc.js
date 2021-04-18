@@ -1,7 +1,6 @@
 const micromatch = require('micromatch')
 const prettier = require('prettier')
 const _ = require('lodash')
-const path = require('path')
 
 const prettierLanguages = prettier.getSupportInfo().languages
 
@@ -21,7 +20,5 @@ module.exports = (allStagedFiles) => {
   ])
   const prettiers = prettierFiles.length > 0 ? [`prettier --write ${prettierFiles.map(addQuotes).join(' ')}`] : []
 
-  const basenames = allStagedFiles.map((e) => path.basename(e))
-
-  return [...prettiers, basenames.includes('package.json') && 'sort-package-json'].filter((e) => e)
+  return prettiers
 }
